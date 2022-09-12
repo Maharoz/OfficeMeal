@@ -22,6 +22,9 @@ namespace API.Entities
         public AppUser User { get; set; }
         public bool IsApproved { get; set; }
 
+        public virtual DepositBill DepositBill { get; set; }
+
+
     }
 
     public class DepositBill
@@ -35,5 +38,6 @@ namespace API.Entities
         [ForeignKey("User")]
         public int UserId { get; set; }
         public AppUser User { get; set; }
+        public int BillId { get; set; }
     }
 }

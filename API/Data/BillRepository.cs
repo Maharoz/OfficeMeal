@@ -19,6 +19,16 @@
                  
         }
 
+        public async Task<IEnumerable<Bill>> GetAllPaidClaimedBill()
+        {
+            return await _context.Bill
+                 .Where(c => c.IsPaid == true
+                 && c.BillingMonth.Month == DateTime.Now.Month
+                 && c.BillingMonth.Year == DateTime.Now.Year).Include(x=>x.DepositBill
+                ).ToListAsync();
+
+        }
+
         public async Task<Bill> GetBillById(int id)
         {
             return await _context.Bill

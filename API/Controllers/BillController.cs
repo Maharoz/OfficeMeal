@@ -24,6 +24,13 @@ namespace API.Controllers
             return Ok(bill);
         }
 
+        [HttpPost("getAllPaidClaimedBill")]
+        public async Task<IEnumerable<Bill>> GetAllPaidClaimedBill()
+        {
+            IEnumerable<Bill> bill = await _unitOfWork.BillRepository.GetAllPaidClaimedBill();
+            return bill;
+        }
+
         [HttpPost("save")]
         public async Task<ActionResult> SaveBill(BillDto billDto)
         {
@@ -38,7 +45,9 @@ namespace API.Controllers
         public async Task<ActionResult> SaveBillDeposit(BillDepositDto billDepositDto)
         {
             var bill = _mapper.Map<DepositBill>(billDepositDto);
+
             Bill specificBill= await _unitOfWork.BillRepository.GetBillById(billDepositDto.UserId);
+            bill.BillId = specificBill.BillId;
             specificBill.IsPaid = true;
             _unitOfWork.BillRepository.Update(specificBill);
             _unitOfWork.BillDepositRepository.Update(bill);

@@ -15,6 +15,8 @@ namespace API.DTOs
         [Required]
         public DateTime BillingMonth { get; set; }
         public bool IsPaid { get; set; }
+
+        public bool IsApproved { get; set; }
     }
 
 
@@ -33,6 +35,22 @@ namespace API.DTOs
         public int UserId { get; set; }
     }
 
+    public class BillDtoForDeposit
+    {
+       
+        public int BillId { get; set; }
 
+        [Required]
+        public decimal BillAmount { get; set; }
+
+        [Required]
+        public DateTime BillingMonth { get; set; }
+        public bool IsPaid { get; set; }
+        public bool IsApproved { get; set; }
+
+        public virtual DepositBill DepositBill { get; set; }
+
+
+    }
 
 }
