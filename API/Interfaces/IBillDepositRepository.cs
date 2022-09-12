@@ -2,6 +2,7 @@
 {
     public interface IBillDepositRepository
     {
+        
         void Update(DepositBill obj);
     }
 }

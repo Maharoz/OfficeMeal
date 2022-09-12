@@ -19,6 +19,12 @@
                  
         }
 
+        public async Task<Bill> GetBillById(int id)
+        {
+            return await _context.Bill
+                 .Where(c => c.UserId == id && c.BillingMonth.Month== DateTime.Now.Month).FirstOrDefaultAsync();
+
+        }
         public void Update(Bill obj)
         {
             _context.Bill.Update(obj);

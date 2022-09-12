@@ -38,9 +38,10 @@ namespace API.Controllers
         public async Task<ActionResult> SaveBillDeposit(BillDepositDto billDepositDto)
         {
             var bill = _mapper.Map<DepositBill>(billDepositDto);
+            Bill specificBill= await _unitOfWork.BillRepository.GetBillById(billDepositDto.UserId);
+            specificBill.IsPaid = true;
+            _unitOfWork.BillRepository.Update(specificBill);
             _unitOfWork.BillDepositRepository.Update(bill);
-
-
             await _unitOfWork.Complete();
             return Ok(bill);
         }
