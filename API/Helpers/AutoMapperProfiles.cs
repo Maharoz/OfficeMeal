@@ -26,6 +26,7 @@ namespace API.Helpers
             CreateMap<MessageDto, Message>();
             CreateMap<BillDto,Bill>();
             CreateMap<BillDepositDto, DepositBill>();
+            CreateMap<DepositBill, BillDepositDto>();
             CreateMap<Bill, BillDto>();
         }
     }

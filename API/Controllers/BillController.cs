@@ -47,12 +47,24 @@ namespace API.Controllers
             var bill = _mapper.Map<DepositBill>(billDepositDto);
 
             Bill specificBill= await _unitOfWork.BillRepository.GetBillById(billDepositDto.UserId);
-            bill.BillsId = specificBill.BillId;
+            bill.BillId = specificBill.BillId;
             specificBill.IsPaid = true;
             _unitOfWork.BillRepository.Update(specificBill);
             _unitOfWork.BillDepositRepository.Update(bill);
             await _unitOfWork.Complete();
             return Ok(bill);
+        }
+
+
+        [HttpPost("saveApprove")]
+        public async Task<ActionResult> SaveBillDepositApprove(BillDtoForApprove billDtoForApprove)
+        {
+
+            Bill specificBill = await _unitOfWork.BillRepository.GetBillByBillId(billDtoForApprove.BillId);
+            specificBill.IsApproved = true;
+            _unitOfWork.BillRepository.Update(specificBill);
+            await _unitOfWork.Complete();
+            return Ok(specificBill);
         }
     }
 }

@@ -44,7 +44,7 @@ export class PayBillComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    console.log(this.f);
+    //console.log(this.f);
     const params: BillDepositDto = {
       bkashTransactionNumber: this.f.tranId.value,
       bkashMobileNumber: this.f.mobileNo.value,

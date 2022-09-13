@@ -1,3 +1,15 @@
-<div class="text-center mt-3">
-  <h2>Pending Claims</h2>
+<div class="card" *ngFor="let bill of bills">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ bill.user.knownAs }}</h5>
+      <p class="card-text">Paid Amount - {{ bill.billAmount }}</p>
+      <p class="card-text">
+        Bkash Transaction Number - {{ bill.depositBill.bkashTransactionNumber }}
+      </p>
+      <p class="card-text">
+        Bkash Mobile - {{ bill.depositBill.bkashMobileNumber }}
+      </p>
+      <a href="#" class="btn btn-primary">Approve</a>
+    </div>
+  </div>
 </div>

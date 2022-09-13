@@ -19,7 +19,16 @@ namespace API.DTOs
         public bool IsApproved { get; set; }
     }
 
+    public class BillDtoForApprove
+    {
+        [Required]
+        public int BillId { get; set; }
 
+        [Required]
+        public bool IsApproved { get; set; }
+
+      
+    }
     public class BillForIdDto
     {
         [Required]

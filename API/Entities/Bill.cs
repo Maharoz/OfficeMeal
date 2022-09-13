@@ -22,6 +22,7 @@ namespace API.Entities
         public AppUser User { get; set; }
         public bool IsApproved { get; set; }
 
+        //[NotMapped]
         public virtual DepositBill DepositBill { get; set; }
 
 
@@ -32,12 +33,12 @@ namespace API.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 0)]
         public int DepositId { get; set; }
-        public int BkashTransactionNumber { get; set; }
-        public int BankAccountNumber { get; set; }
+        public string BkashTransactionNumber { get; set; }
+        public string BkashMobileNumber { get; set; }
 
         [ForeignKey("User")]
         public int UserId { get; set; }
         public AppUser User { get; set; }
-        public int BillsId { get; set; }
+        public int BillId { get; set; }
     }
 }
