@@ -7,13 +7,16 @@ import { PresenceService } from './_services/presence.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'The Dating app';
+  title = 'CEL MEAL';
   users: any;
 
-  constructor(private accountService: AccountService, private presence: PresenceService) {}
+  constructor(
+    private accountService: AccountService,
+    private presence: PresenceService
+  ) {}
 
   ngOnInit() {
     this.setCurrentUser();
@@ -23,8 +26,7 @@ export class AppComponent implements OnInit {
     const user: User = JSON.parse(localStorage.getItem('user'));
     if (user) {
       this.accountService.setCurrentUser(user);
-      this.presence.createHubConnection(user);
+      //this.presence.createHubConnection(user);
     }
-
   }
 }

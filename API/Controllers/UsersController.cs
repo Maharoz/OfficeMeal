@@ -20,13 +20,12 @@ namespace API.Controllers
     public class UsersController : BaseApiController
     {
         private readonly IMapper _mapper;
-        private readonly IPhotoService _photoService;
+       // private readonly IPhotoService _photoService;
         private readonly IUnitOfWork _unitOfWork;
-        public UsersController(IUnitOfWork unitOfWork, IMapper mapper,
-            IPhotoService photoService)
+        public UsersController(IUnitOfWork unitOfWork, IMapper mapper
+            )
         {
             _unitOfWork = unitOfWork;
-            _photoService = photoService;
             _mapper = mapper;
         }
 
@@ -73,27 +72,27 @@ namespace API.Controllers
         {
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
-            var result = await _photoService.AddPhotoAsync(file);
+           // var result = await _photoService.AddPhotoAsync(file);
 
-            if (result.Error != null) return BadRequest(result.Error.Message);
+            //if (result.Error != null) return BadRequest(result.Error.Message);
 
-            var photo = new Photo
-            {
-                Url = result.SecureUrl.AbsoluteUri,
-                PublicId = result.PublicId
-            };
+            //var photo = new Photo
+            //{
+            //    Url = result.SecureUrl.AbsoluteUri,
+            //    PublicId = result.PublicId
+            //};
 
-            if (user.Photos.Count == 0)
-            {
-                photo.IsMain = true;
-            }
+            //if (user.Photos.Count == 0)
+            //{
+            //    photo.IsMain = true;
+            //}
 
-            user.Photos.Add(photo);
+            //user.Photos.Add(photo);
 
-            if (await _unitOfWork.Complete())
-            {
-                return CreatedAtRoute("GetUser", new { username = user.UserName }, _mapper.Map<PhotoDto>(photo));
-            }
+            //if (await _unitOfWork.Complete())
+            //{
+            //    return CreatedAtRoute("GetUser", new { username = user.UserName }, _mapper.Map<PhotoDto>(photo));
+            //}
 
 
             return BadRequest("Problem addding photo");
@@ -130,8 +129,8 @@ namespace API.Controllers
 
             if (photo.PublicId != null)
             {
-                var result = await _photoService.DeletePhotoAsync(photo.PublicId);
-                if (result.Error != null) return BadRequest(result.Error.Message);
+                //var result = await _photoService.DeletePhotoAsync(photo.PublicId);
+                //if (result.Error != null) return BadRequest(result.Error.Message);
             }
 
             user.Photos.Remove(photo);
