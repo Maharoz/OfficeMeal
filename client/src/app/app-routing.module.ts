@@ -15,6 +15,7 @@ import { MemberDetailedResolver } from './_resolvers/member-detailed.resolver';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { AdminGuard } from './_guards/admin.guard';
 import { PayBillComponent } from './pay-bill/pay-bill.component';
+import { PaidClaimComponent } from './paid-claim/paid-claim.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -36,6 +37,7 @@ const routes: Routes = [
         canDeactivate: [PreventUnsavedChangesGuard],
       },
       { path: 'lists', component: ListsComponent },
+      { path: 'payments', component: PaidClaimComponent },
       { path: 'messages', component: MessagesComponent },
       {
         path: 'admin',

@@ -7,6 +7,11 @@
     <ul class="navbar-nav me-auto">
       <ng-container *ngIf="accountService.currentUser$ | async">
         <li class="nav-item">
+          <a class="nav-link" routerLink="/payments" routerLinkActive="active"
+            >Payment Claim</a
+          >
+        </li>
+        <!-- <li class="nav-item">
           <a class="nav-link" routerLink="/members" routerLinkActive="active"
             >Matches</a
           >
@@ -25,13 +30,13 @@
           <a class="nav-link" routerLink="/admin" routerLinkActive="active"
             >Admin</a
           >
-        </li>
+        </li> -->
       </ng-container>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" routerLink="/errors" routerLinkActive="active"
           >Errors</a
         >
-      </li>
+      </li> -->
     </ul>
 
     <div

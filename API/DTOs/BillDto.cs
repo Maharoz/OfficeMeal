@@ -30,8 +30,8 @@ namespace API.DTOs
 
     public class BillDepositDto
     {
-        public int BkashTransactionNumber { get; set; }
-        public int BankAccountNumber { get; set; }
+        public string BkashTransactionNumber { get; set; }
+        public string BkashMobileNumber { get; set; }
         public int UserId { get; set; }
     }
 

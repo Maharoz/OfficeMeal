@@ -34,6 +34,7 @@ import { PhotoManagementComponent } from './admin/photo-management/photo-managem
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 import { PayBillComponent } from './pay-bill/pay-bill.component';
+import { PaidClaimComponent } from './paid-claim/paid-claim.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { PayBillComponent } from './pay-bill/pay-bill.component';
     PhotoManagementComponent,
     RolesModalComponent,
     ConfirmDialogComponent,
-    PayBillComponent
+    PayBillComponent,
+    PaidClaimComponent
   ],
   imports: [
     BrowserModule,

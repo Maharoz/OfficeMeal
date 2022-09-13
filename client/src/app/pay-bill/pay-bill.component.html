@@ -6,6 +6,7 @@
 </div>
 
 <label
+  *ngif="isPayment"
   class="form-check-label d-flex justify-content-center mt-2"
   for="flexSwitchCheckChecked"
   >{{ paymentText }}</label
@@ -22,45 +23,51 @@
     (click)="paymentType($event)"
   />
 </div> -->
+<form [formGroup]="payBillForm" (ngSubmit)="onSubmit()" *ngif="isPayment">
+  <div class="container text-center mt-2">
+    <div class="row">
+      <div class="col">
+        <img src="../../assets/bkash.jpeg" alt="bkash" height="650px" />
+      </div>
+      <div class="col">
+        <div class="input-group input-group-md mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-sm"
+            >Tran No.</span
+          >
+          <input
+            type="text"
+            class="form-control"
+            formControlName="tranId"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm"
+          />
+        </div>
 
-<div class="container text-center mt-2">
-  <div class="row">
-    <div class="col">
-      <img src="../../assets/bkash.jpeg" alt="bkash" height="650px" />
-    </div>
-    <div class="col">
-      <div class="input-group input-group-md mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-sm">Tran No.</span>
-        <input
-          type="text"
-          class="form-control"
-          aria-label="Sizing example input"
-          aria-describedby="inputGroup-sizing-sm"
-        />
+        <br />
+        <button
+          type="submit"
+          class="btn btn-primary float-start"
+          style="width: 250px"
+          [disabled]="!payBillForm.valid"
+        >
+          Save
+        </button>
       </div>
 
-      <br />
-      <button
-        type="button"
-        class="btn btn-primary float-start"
-        style="width: 250px"
-      >
-        Save
-      </button>
-    </div>
-
-    <div class="col">
-      <div class="input-group input-group-md mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-sm"
-          >Mobile No.</span
-        >
-        <input
-          type="text"
-          class="form-control"
-          aria-label="Sizing example input"
-          aria-describedby="inputGroup-sizing-sm"
-        />
+      <div class="col">
+        <div class="input-group input-group-md mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-sm"
+            >Mobile No.</span
+          >
+          <input
+            type="text"
+            class="form-control"
+            formControlName="mobileNo"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm"
+          />
+        </div>
       </div>
     </div>
   </div>
-</div>
+</form>

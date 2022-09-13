@@ -180,6 +180,9 @@ namespace API.Migrations
                     b.Property<DateTime>("BillingMonth")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("DepositBillDepositId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
 
@@ -190,6 +193,8 @@ namespace API.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("BillId");
+
+                    b.HasIndex("DepositBillDepositId");
 
                     b.HasIndex("UserId");
 
@@ -226,7 +231,7 @@ namespace API.Migrations
                     b.Property<int>("BankAccountNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("BillId")
+                    b.Property<int>("BillsId")
                         .HasColumnType("int");
 
                     b.Property<int>("BkashTransactionNumber")
@@ -388,11 +393,17 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Entities.Bill", b =>
                 {
+                    b.HasOne("API.Entities.DepositBill", "DepositBill")
+                        .WithMany()
+                        .HasForeignKey("DepositBillDepositId");
+
                     b.HasOne("API.Entities.AppUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("DepositBill");
 
                     b.Navigation("User");
                 });

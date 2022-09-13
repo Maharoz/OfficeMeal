@@ -9,7 +9,7 @@ import { UserParams } from '../_models/userParams';
 import { AccountService } from './account.service';
 import { User } from '../_models/user';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
-import { BillForIdDto } from '../_models/bill';
+import { BillDepositDto, BillForIdDto } from '../_models/bill';
 
 @Injectable({
   providedIn: 'root',
@@ -34,5 +34,9 @@ export class BillService {
   getBillByMessMember(bill: BillForIdDto) {
     console.log(bill);
     return this.http.post(this.baseUrl + 'bill/getBillById', bill);
+  }
+
+  saveDeposit(deposit: BillDepositDto) {
+    return this.http.post(this.baseUrl + 'bill/saveDeposit', deposit);
   }
 }

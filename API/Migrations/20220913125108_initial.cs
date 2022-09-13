@@ -178,6 +178,28 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DepositBill",
+                columns: table => new
+                {
+                    DepositId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BkashTransactionNumber = table.Column<int>(type: "int", nullable: false),
+                    BankAccountNumber = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    BillsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DepositBill", x => x.DepositId);
+                    table.ForeignKey(
+                        name: "FK_DepositBill_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Photos",
                 columns: table => new
                 {
@@ -216,6 +238,35 @@ namespace API.Migrations
                         principalTable: "Groups",
                         principalColumn: "Name",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Bill",
+                columns: table => new
+                {
+                    BillId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    BillAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    BillingMonth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsPaid = table.Column<bool>(type: "bit", nullable: false),
+                    IsApproved = table.Column<bool>(type: "bit", nullable: false),
+                    DepositBillDepositId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bill", x => x.BillId);
+                    table.ForeignKey(
+                        name: "FK_Bill_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Bill_DepositBill_DepositBillDepositId",
+                        column: x => x.DepositBillDepositId,
+                        principalTable: "DepositBill",
+                        principalColumn: "DepositId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -258,9 +309,24 @@ namespace API.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bill_DepositBillDepositId",
+                table: "Bill",
+                column: "DepositBillDepositId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bill_UserId",
+                table: "Bill",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Connections_GroupName",
                 table: "Connections",
                 column: "GroupName");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DepositBill_UserId",
+                table: "DepositBill",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Photos_AppUserId",
@@ -286,6 +352,9 @@ namespace API.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Bill");
+
+            migrationBuilder.DropTable(
                 name: "Connections");
 
             migrationBuilder.DropTable(
@@ -293,6 +362,9 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "DepositBill");
 
             migrationBuilder.DropTable(
                 name: "Groups");

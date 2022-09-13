@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
-import { BillForIdDto } from '../_models/bill';
+import { BillDepositDto, BillForIdDto } from '../_models/bill';
 import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
 import { BillService } from '../_services/bill.service';
@@ -12,15 +13,20 @@ import { BillService } from '../_services/bill.service';
   styleUrls: ['./pay-bill.component.css'],
 })
 export class PayBillComponent implements OnInit {
+  payBillForm: FormGroup;
   user: User;
   infoText: string;
   isBkash: boolean = true;
+  isPayment: boolean = false;
   paymentText: string =
     'Scan the QR code and and after payment insert the transaction number';
+  submitted: boolean = false;
+
   constructor(
     private accountService: AccountService,
     private billService: BillService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private formBuilder: FormBuilder
   ) {
     this.accountService.currentUser$
       .pipe(take(1))
@@ -29,6 +35,28 @@ export class PayBillComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadBill();
+
+    this.payBillForm = this.formBuilder.group({
+      tranId: ['', Validators.required],
+      mobileNo: ['', Validators.required],
+    });
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    console.log(this.f);
+    const params: BillDepositDto = {
+      bkashTransactionNumber: this.f.tranId.value,
+      bkashMobileNumber: this.f.mobileNo.value,
+      userId: this.user.userId,
+    };
+    this.billService.saveDeposit(params).subscribe((bill: any) => {
+      console.log(bill);
+    });
+  }
+
+  get f() {
+    return this.payBillForm.controls;
   }
 
   paymentType(event) {
@@ -65,6 +93,7 @@ export class PayBillComponent implements OnInit {
         console.log('Your bill is approved');
       } else {
         this.infoText = 'Your bill is ' + bill.billAmount + ' Taka.';
+        this.isPayment = true;
       }
     });
   }

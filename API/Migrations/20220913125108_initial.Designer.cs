@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220912170637_DepositTableAdded")]
-    partial class DepositTableAdded
+    [Migration("20220913125108_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -182,6 +182,9 @@ namespace API.Migrations
                     b.Property<DateTime>("BillingMonth")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("DepositBillDepositId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
 
@@ -192,6 +195,8 @@ namespace API.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("BillId");
+
+                    b.HasIndex("DepositBillDepositId");
 
                     b.HasIndex("UserId");
 
@@ -226,6 +231,9 @@ namespace API.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DepositId"), 1L, 1);
 
                     b.Property<int>("BankAccountNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BillsId")
                         .HasColumnType("int");
 
                     b.Property<int>("BkashTransactionNumber")
@@ -387,11 +395,17 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Entities.Bill", b =>
                 {
+                    b.HasOne("API.Entities.DepositBill", "DepositBill")
+                        .WithMany()
+                        .HasForeignKey("DepositBillDepositId");
+
                     b.HasOne("API.Entities.AppUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("DepositBill");
 
                     b.Navigation("User");
                 });

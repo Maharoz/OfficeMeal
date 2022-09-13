@@ -38,6 +38,6 @@ namespace API.Entities
         [ForeignKey("User")]
         public int UserId { get; set; }
         public AppUser User { get; set; }
-        public int BillId { get; set; }
+        public int BillsId { get; set; }
     }
 }

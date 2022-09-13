@@ -1,0 +1,8 @@
+.invalid-feedback {
+    font-family: "cabin",sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+    font-style: italic;
+    color: #f71313;
+    -webkit-font-smoothing: antialiased;
+  }

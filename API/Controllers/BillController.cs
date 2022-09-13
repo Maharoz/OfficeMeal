@@ -47,7 +47,7 @@ namespace API.Controllers
             var bill = _mapper.Map<DepositBill>(billDepositDto);
 
             Bill specificBill= await _unitOfWork.BillRepository.GetBillById(billDepositDto.UserId);
-            bill.BillId = specificBill.BillId;
+            bill.BillsId = specificBill.BillId;
             specificBill.IsPaid = true;
             _unitOfWork.BillRepository.Update(specificBill);
             _unitOfWork.BillDepositRepository.Update(bill);
