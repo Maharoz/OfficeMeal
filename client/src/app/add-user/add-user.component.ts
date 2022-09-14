@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../_services/userService';
 
 export interface PeriodicElement {
   name: string;
@@ -24,25 +25,27 @@ export class AddUserComponent implements OnInit {
 
   dataSource = [];
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
       name: ['', Validators.required],
     });
+
+    this.loadAllUsers();
   }
 
+  loadAllUsers() {
+    this.userService.getUsers().subscribe((response: any) => {
+      //this.bills = response;
+      this.dataSource = response;
+      console.log(response);
+    });
+  }
   onSubmit() {
     console.log(this.userForm);
-    // this.submitted = true;
-    // //console.log(this.f);
-    // const params: BillDepositDto = {
-    //   bkashTransactionNumber: this.f.tranId.value,
-    //   bkashMobileNumber: this.f.mobileNo.value,
-    //   userId: this.user.userId,
-    // };
-    // this.billService.saveDeposit(params).subscribe((bill: any) => {
-    //   console.log(bill);
-    // });
   }
 }

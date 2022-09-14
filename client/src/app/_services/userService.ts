@@ -14,7 +14,7 @@ import { Bill, BillDepositDto, BillForIdDto } from '../_models/bill';
 @Injectable({
   providedIn: 'root',
 })
-export class BillService {
+export class UserService {
   baseUrl = environment.apiUrl;
   members: Member[] = [];
   memberCache = new Map();
@@ -31,16 +31,7 @@ export class BillService {
     });
   }
 
-  getBillByMessMember(bill: BillForIdDto) {
-    console.log(bill);
-    return this.http.post(this.baseUrl + 'bill/getBillById', bill);
-  }
-
-  saveDeposit(deposit: BillDepositDto) {
-    return this.http.post(this.baseUrl + 'bill/saveDeposit', deposit);
-  }
-
-  getPaidClaims() {
-    return this.http.post(this.baseUrl + 'bill/getAllPaidClaimedBill', null);
+  getUsers() {
+    return this.http.post(this.baseUrl + 'users/get-all-user', null);
   }
 }

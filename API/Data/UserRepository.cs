@@ -75,7 +75,6 @@ namespace API.Data
         public async Task<IEnumerable<AppUser>> GetUsersAsync()
         {
             return await _context.Users
-                .Include(p => p.Photos)
                 .ToListAsync();
         }
 

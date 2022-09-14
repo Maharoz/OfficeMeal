@@ -8,9 +8,11 @@ using API.Entities;
 using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
+using API.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -138,6 +140,14 @@ namespace API.Controllers
             if (await _unitOfWork.Complete()) return Ok();
 
             return BadRequest("Failed to delete the photo");
+        }
+
+
+        [HttpPost("get-all-user")]
+        public async Task<IEnumerable<AppUser>> GellAll()
+        {
+            IEnumerable<AppUser> user = await _unitOfWork.UserRepository.GetUsersAsync();
+            return user;
         }
     }
 }
