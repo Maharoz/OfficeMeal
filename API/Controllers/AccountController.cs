@@ -40,6 +40,24 @@ public class AccountController : BaseApiController
         };
     }
 
+    //[HttpPost("get-all-user")]
+    //public async Task<ActionResult<UserDto>> GellAll()
+    //{
+   
+
+    //    var roleResult = await _userManager.GetUserAsync(user, "Member");
+
+    //    if (!roleResult.Succeeded) return BadRequest(result.Errors);
+
+    //    return new UserDto
+    //    {
+    //        Username = user.UserName,
+    //        Token = await _tokenService.CreateToken(user),
+    //        KnownAs = user.KnownAs,
+    //        Gender = user.Gender
+    //    };
+    //}
+
     [HttpPost("login")]
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {

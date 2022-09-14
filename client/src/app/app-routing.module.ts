@@ -16,6 +16,7 @@ import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { AdminGuard } from './_guards/admin.guard';
 import { PayBillComponent } from './pay-bill/pay-bill.component';
 import { PaidClaimComponent } from './paid-claim/paid-claim.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
     children: [
       { path: 'paybill', component: PayBillComponent },
       { path: 'members', component: MemberListComponent },
+      { path: 'adduser', component: AddUserComponent },
       {
         path: 'members/:username',
         component: MemberDetailComponent,

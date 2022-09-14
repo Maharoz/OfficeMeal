@@ -35,6 +35,9 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 import { PayBillComponent } from './pay-bill/pay-bill.component';
 import { PaidClaimComponent } from './paid-claim/paid-claim.component';
+import { AddUserComponent } from './add-user/add-user.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -62,9 +65,12 @@ import { PaidClaimComponent } from './paid-claim/paid-claim.component';
     RolesModalComponent,
     ConfirmDialogComponent,
     PayBillComponent,
-    PaidClaimComponent
+    PaidClaimComponent,
+    AddUserComponent,
   ],
   imports: [
+    MatTableModule,
+    MatSelectModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -77,8 +83,8 @@ import { PaidClaimComponent } from './paid-claim/paid-claim.component';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
