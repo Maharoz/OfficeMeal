@@ -9,9 +9,16 @@ export interface BillDepositDto {
   userId: number;
 }
 
-export interface Bill {
-  billId: number;
+export interface BillDto {
   userId: number;
   billAmount: number;
   billingMonth: Date;
+  isPaid: boolean;
+  isApproved: boolean;
+}
+
+export interface BillDepositDto {
+  bkashTransactionNumber: string;
+  bkashMobileNumber: string;
+  userId: number;
 }

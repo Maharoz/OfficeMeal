@@ -73,6 +73,21 @@
     <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
   </ng-container> -->
 
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let element">
+      <button
+        class="btn btn-primary"
+        type="button"
+        (click)="AddtoMealAndMail(element)"
+        mat-icon-button
+        matTooltip="Approve/Reject"
+      >
+        <mat-icon>Add To Meal and send Mail</mat-icon></button
+      >&nbsp;
+    </td>
+  </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>

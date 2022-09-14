@@ -9,7 +9,7 @@ import { UserParams } from '../_models/userParams';
 import { AccountService } from './account.service';
 import { User } from '../_models/user';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
-import { Bill, BillDepositDto, BillForIdDto } from '../_models/bill';
+import { BillDepositDto, BillDto, BillForIdDto } from '../_models/bill';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +38,9 @@ export class BillService {
 
   saveDeposit(deposit: BillDepositDto) {
     return this.http.post(this.baseUrl + 'bill/saveDeposit', deposit);
+  }
+  saveBill(bill: BillDto) {
+    return this.http.post(this.baseUrl + 'bill/save', bill);
   }
 
   getPaidClaims() {

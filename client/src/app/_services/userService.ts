@@ -9,7 +9,7 @@ import { UserParams } from '../_models/userParams';
 import { AccountService } from './account.service';
 import { User } from '../_models/user';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
-import { Bill, BillDepositDto, BillForIdDto } from '../_models/bill';
+import { BillDepositDto, BillForIdDto } from '../_models/bill';
 
 @Injectable({
   providedIn: 'root',
